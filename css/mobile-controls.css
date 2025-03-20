@@ -1,0 +1,349 @@
+/* Mobile Controls Styling */
+.mobile-controls {
+  display: none; /* Hidden by default, will be shown on mobile devices */
+  position: fixed;
+  bottom: 10px; /* Increased from 5px to give more space for larger buttons */
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  touch-action: none;
+  pointer-events: auto;
+}
+
+.d-pad {
+  position: absolute;
+  left: 15px; /* Increased from 10px to give more space */
+  bottom: 0;
+  display: flex;
+  gap: 12px; /* Increased from 8px for better spacing between larger buttons */
+}
+
+.action-buttons {
+  position: absolute;
+  right: 15px; /* Increased from 10px to give more space */
+  bottom: 0;
+  display: flex;
+  gap: 12px; /* Increased from 8px for better spacing between larger buttons */
+}
+
+.control-btn {
+  width: 80px; /* Increased from 60px */
+  height: 80px; /* Increased from 60px */
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Increased from 2px */
+  color: white;
+  font-size: 24px; /* Increased from 18px */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow for better visibility */
+}
+
+.control-btn.active {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(0.95);
+}
+
+.control-btn:active {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(0.95);
+}
+
+.d-pad-left, .d-pad-right {
+  font-size: 32px; /* Increased from 24px */
+}
+
+.action-btn {
+  background-color: rgba(255, 0, 0, 0.3);
+  border: 3px solid rgba(255, 0, 0, 0.5); /* Increased from 2px */
+}
+
+.action-btn.active,
+.action-btn:active {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+/* Screen adjustment controls */
+.screen-adjust {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1500;
+  display: flex;
+  gap: 10px;
+}
+
+.screen-adjust-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide any keyboard elements from script21.js */
+.keyboard, 
+.keyboard__keys, 
+.keyboard__key {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Landscape orientation lock message */
+.orientation-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: white;
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+  padding: 20px;
+}
+
+.orientation-message img {
+  width: 80px;
+  height: 80px;
+  margin: 20px auto;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Game container */
+.game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background-color: #000;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 1024px) {
+  .mobile-controls {
+    display: block;
+  }
+  
+  /* Hide the keyboard info on mobile */
+  .info {
+    display: none;
+  }
+  
+  /* Hide any keyboard elements from script21.js */
+  .keyboard, 
+  .keyboard__keys, 
+  .keyboard__key {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  /* Adjust canvas for mobile - Extended view approach */
+  canvas {
+    width: 100% !important; /* Fill width */
+    height: auto !important; /* Maintain aspect ratio */
+    max-width: 100% !important; /* Ensure it doesn't overflow */
+    max-height: calc(100vh - 100px) !important; /* Leave space for controls */
+    object-fit: contain !important; /* Maintain aspect ratio */
+    margin: 0 auto !important;
+    display: block;
+    position: relative;
+    image-rendering: pixelated; /* Keep pixel art crisp */
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Portrait orientation detection */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .orientation-message {
+    display: flex;
+  }
+  
+  .game-container {
+    display: none;
+  }
+}
+
+/* Landscape orientation specific styles */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .orientation-message {
+    display: none;
+  }
+  
+  .game-container {
+    display: block;
+  }
+  
+  /* Optimize button sizes for landscape */
+  .control-btn {
+    width: 65px; /* Increased from 45px */
+    height: 65px; /* Increased from 45px */
+    font-size: 18px; /* Increased from 14px */
+  }
+  
+  .d-pad {
+    left: 15px;
+    bottom: 8px;
+    gap: 10px; /* Increased from 6px */
+  }
+  
+  .action-buttons {
+    right: 15px;
+    bottom: 8px;
+    gap: 10px; /* Increased from 6px */
+    display: flex;
+    flex-direction: row;
+  }
+  
+  /* Extended canvas sizing for landscape */
+  canvas {
+    max-width: 100% !important;
+    max-height: calc(100vh - 90px) !important;
+    margin: 0 auto !important;
+    display: block;
+  }
+  
+  /* Make screen adjustment controls smaller in landscape */
+  .screen-adjust {
+    top: 5px;
+    right: 5px;
+  }
+  
+  .screen-adjust-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}
+
+/* Small landscape screens */
+@media (max-width: 1024px) and (orientation: landscape) and (max-height: 500px) {
+  .control-btn {
+    width: 55px; /* Increased from 40px */
+    height: 55px; /* Increased from 40px */
+    font-size: 16px; /* Increased from 12px */
+  }
+  
+  .mobile-controls {
+    bottom: 5px; /* Increased from 2px */
+  }
+  
+  /* Adjust canvas for small screens */
+  canvas {
+    max-height: calc(100vh - 70px) !important;
+  }
+}
+
+/* Prevent scrolling on mobile */
+html, body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* Canvas size classes for user adjustment */
+.canvas-size-normal {
+  transform: scale(1) !important;
+}
+
+.canvas-size-large {
+  transform: scale(1.2) !important;
+  transform-origin: center center !important;
+}
+
+.canvas-size-small {
+  transform: scale(0.8) !important;
+  transform-origin: center center !important;
+}
+
+/* Score display */
+.score-display {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1500;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  text-shadow: 2px 2px 0 #000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.coin-icon {
+  background-image: url('../sprites/items.png');
+  background-position: -5px -97px;
+}
+
+/* Responsive adjustments for score display */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .score-display {
+    top: 5px;
+    left: 5px;
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+  
+  .score-icon {
+    width: 16px;
+    height: 16px;
+  }
+} 
